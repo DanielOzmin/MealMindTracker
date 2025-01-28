@@ -1,0 +1,33 @@
+
+.circular-progress {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+  
+  .circular-progress svg {
+    transform: rotate(-90deg); 
+  }
+  
+  
+  .circular-text {
+    position: absolute;
+    text-align: center;
+    color: #333;
+  }
+  
+  .circular-text strong {
+    font-size: 1.2rem; 
+    color: #333; 
+  }
+  
+  .circular-text span {
+    font-size: 0.8rem; 
+    color: #555;
+  }
+  
+  
