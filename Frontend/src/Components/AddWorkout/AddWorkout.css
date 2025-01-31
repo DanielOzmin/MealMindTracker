@@ -1,61 +1,62 @@
-
-
-  .add-recipe-container {
-    background: #ffffff;
+.add-workout-container {
+    background: rgba(255, 255, 255, 0.9);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
     max-width: 500px;
-  }
-  
-  .add-recipe-form h2 {
+    width: 100%;
     text-align: center;
-    margin-bottom: 1.5rem;
+  }
+  
+  .add-workout-container h2 {
+    font-size: 1.8rem;
     color: #007bff;
-  }
-  
-  .form-group {
     margin-bottom: 1.5rem;
   }
   
-  .form-group label {
-    display: block;
+  .add-workout-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-workout-form label {
     font-size: 1rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
     color: #555;
+    text-align: left;
   }
   
-  .form-group input,
-  .form-group textarea {
+  .add-workout-form input {
     width: 100%;
     padding: 0.75rem;
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 8px;
     box-sizing: border-box;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease;
   }
   
-  .form-group input:focus,
-  .form-group textarea:focus {
+  .add-workout-form input:focus {
     border-color: #007bff;
     outline: none;
   }
-  .submit-btn {
+  
+  .add-workout-form button {
     width: 100%;
     padding: 0.75rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    color: #ffffff;
+    color: white;
     background: #007bff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 1rem;
   }
   
-  .submit-btn:hover {
+  .add-workout-form button:hover {
     background: #0056b3;
   }
-  

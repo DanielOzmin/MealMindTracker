@@ -1,5 +1,70 @@
-.AppContainer {
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  .AppContainer {
     display: flex;
-}
-
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  
+  .ContentRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px; 
+    padding-top: 1rem;
+  }
+  
+  .Menu {
+    flex: 1;
+    max-width: 250px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .statistics-container {
+    flex: 2;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .add-recipe-container {
+    flex: 1;
+    max-width: 300px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  @media (max-width: 1024px) {
+    .ContentRow {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .Menu, .statistics-container, .add-recipe-container {
+      max-width: 90%;
+    }
+  }
 

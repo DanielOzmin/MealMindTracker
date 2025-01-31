@@ -1,0 +1,50 @@
+.base-calculation-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+.nutrient-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.nutrient-section {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nutrient-section h3 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.nutrient-values {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nutrient-values p {
+    font-size: 1rem;
+    background: #ffffff;
+    padding: 0.5rem;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nutrient-values span {
+    font-weight: bold;
+    color: #343a40;
+}
