@@ -1,0 +1,68 @@
+/* Settings komponens méretének és stílusának egyeztetése a Statistics komponenssel */
+.settings-container {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Fejléc színe és mérete */
+.settings-container h2 {
+    color: #007bff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Formázás */
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Form elemek */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Label stílus */
+.form-group label {
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Select mezők */
+.form-group select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+}
+
+/* Gomb stílus */
+.submit-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 1rem;
+}
+
+.submit-btn:hover {
+    background: #0056b3;
+}
+

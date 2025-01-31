@@ -1,7 +1,7 @@
 import './NutritionIndex.css'
 
 const NutritionIndex = ({ percentage, label }: { percentage: number; label: string }) => {
-    const radius = 50
+  const radius = 50
   const circumference = 2 * Math.PI * radius
   const offset = circumference - (percentage / 100) * circumference
 
