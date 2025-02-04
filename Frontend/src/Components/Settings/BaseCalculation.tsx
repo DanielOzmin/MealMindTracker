@@ -36,78 +36,90 @@ const BaseCalculation = ({ personalData }: { personalData: PersonalData }) => {
         }
 
         let protein = ((calories * 0.2) / 4)
-        let carb = (calories * 0.5) / 4
+        let carbohydrates = (calories * 0.5) / 4
         let fat = (calories * 0.3) / 9
 
 
-        return { calories, protein, carb, fat }
+        return { calories, protein, carbohydrates, fat }
     }
 
-    const CalculateMikroNutrients = () =>{
-        let fibre = 0
+    const CalculateMikroNutrients = () => {
+        let fiber = 0
         let magnesium = 0
-        let natrium = 0
+        let sodium = 0
         let calcium = 0
-        let potassium =0
-        let iron =0
-        let zinc =0
-        if(personalData.gender === "male"){
-            fibre = 35, 
-            magnesium = 420, 
-            natrium = 1600, 
-            calcium = 1150, 
-            potassium = 3400, 
-            iron = 8, 
-            zinc = 11
-        }else{
-            fibre = 25, 
-            magnesium = 310, 
-            natrium = 1500, 
-            calcium = 1000, 
-            potassium = 2600, 
-            iron = 18, 
-            zinc = 8
+        let potassium = 0
+        let iron = 0
+        let zinc = 0
+        if (personalData.gender === "male") {
+                fiber = 35,
+                magnesium = 420,
+                sodium = 1600,
+                calcium = 1150,
+                potassium = 3400,
+                iron = 8,
+                zinc = 11
+        } else {
+                fiber = 25,
+                magnesium = 310,
+                sodium = 1500,
+                calcium = 1000,
+                potassium = 2600,
+                iron = 18,
+                zinc = 8
         }
 
 
-        return {fibre,magnesium,natrium,calcium,potassium,iron,zinc}
+        return { fiber, magnesium, sodium, calcium, potassium, iron, zinc }
     }
 
-    useEffect(()=>{
-        const macroNutrients = CalculateBMRAndMakroNutrients()
-        const microNutrients = CalculateMikroNutrients()
-        setNutrients(prev => ({...prev, macroNutrients,microNutrients}))
-
-    },[personalData,setNutrients])
+    useEffect(() => {
+        const calculateNutrients = {
+            calories: CalculateBMRAndMakroNutrients().calories,
+            protein: CalculateBMRAndMakroNutrients().protein,
+            carbohydrates: CalculateBMRAndMakroNutrients().carbohydrates,
+            fat: CalculateBMRAndMakroNutrients().fat,
+            fiber: CalculateMikroNutrients().fiber,
+            magnesium: CalculateMikroNutrients().magnesium,
+            sodium: CalculateMikroNutrients().sodium,
+            calcium: CalculateMikroNutrients().calcium,
+            potassium: CalculateMikroNutrients().potassium,
+            iron: CalculateMikroNutrients().iron,
+            zinc: CalculateMikroNutrients().zinc
+        }
     
+        setNutrients(calculateNutrients)
 
-    return (
-        <div className="base-calculation-container">
-            <h2>Daily Intake</h2>
-            <div className="nutrient-grid">
-                <div className="nutrient-section">
-                    <h3>Macronutrients</h3>
-                    <div className="nutrient-values">
-                        <p><span>Kcal:</span> {nutrients?.macroNutrients.calories.toFixed(0)}</p>
-                        <p><span>Protein:</span> {nutrients?.macroNutrients.protein.toFixed(1)}g</p>
-                        <p><span>Carb:</span> {nutrients?.macroNutrients.carb.toFixed(1)}g</p>
-                        <p><span>Fat:</span> {nutrients?.macroNutrients.fat.toFixed(1)}g</p>
-                    </div>
+    }, [personalData, setNutrients])
+
+
+return (
+    <div className="base-calculation-container">
+        <h2>Daily Intake</h2>
+        <div className="nutrient-grid">
+            <div className="nutrient-section">
+                <h3>Macronutrients</h3>
+                <div className="nutrient-values">
+                    <p><span>Kcal:</span> {nutrients?.calories.toFixed(0)}</p>
+                    <p><span>Protein:</span> {nutrients?.protein.toFixed(1)}g</p>
+                    <p><span>Carb:</span> {nutrients?.carbohydrates.toFixed(1)}g</p>
+                    <p><span>Fat:</span> {nutrients?.fat.toFixed(1)}g</p>
                 </div>
-                <div className="nutrient-section">
-                    <h3>Micronutrients</h3>
-                    <div className="nutrient-values">
-                        <p><span>Fibre:</span> {nutrients?.microNutrients.fibre}g</p>
-                        <p><span>Magnesium:</span> {nutrients?.microNutrients.magnesium}mg</p>
-                        <p><span>Natrium:</span> {nutrients?.microNutrients.natrium}mg</p>
-                        <p><span>Calcium:</span> {nutrients?.microNutrients.calcium}mg</p>
-                        <p><span>Potassium:</span> {nutrients?.microNutrients.potassium}mg</p>
-                        <p><span>Iron:</span> {nutrients?.microNutrients.iron}mg</p>
-                        <p><span>Zinc:</span> {nutrients?.microNutrients.zinc}mg</p>
-                    </div>
+            </div>
+            <div className="nutrient-section">
+                <h3>Micronutrients</h3>
+                <div className="nutrient-values">
+                    <p><span>Fibre:</span> {nutrients?.fiber}g</p>
+                    <p><span>Magnesium:</span> {nutrients?.magnesium}mg</p>
+                    <p><span>Natrium:</span> {nutrients?.sodium}mg</p>
+                    <p><span>Calcium:</span> {nutrients?.calcium}mg</p>
+                    <p><span>Potassium:</span> {nutrients?.potassium}mg</p>
+                    <p><span>Iron:</span> {nutrients?.iron}mg</p>
+                    <p><span>Zinc:</span> {nutrients?.zinc}mg</p>
                 </div>
             </div>
         </div>
-    )
+    </div>
+)
 }
 export default BaseCalculation

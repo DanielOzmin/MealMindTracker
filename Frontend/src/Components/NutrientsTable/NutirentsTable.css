@@ -1,0 +1,51 @@
+.nutrition-facts {
+    background: white;
+    border: 2px solid black;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.total-weight {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.calories {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nutrient {
+    margin-top: 10px;
+    text-align: left;
+}
+
+.nutrient p {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+.add-to-meals-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.add-to-meals-btn:hover {
+    background-color: #0056b3;
+}

@@ -1,7 +1,7 @@
 import './Menu.css'
 import { useNavigate } from 'react-router-dom'
 
-type View = "Daily" | "Weekly" | "Monthly" | "AllTime" | "Settings" | "AddWorkout"
+type View = "Daily" | "Weekly" | "Monthly" | "AllTime" | "Settings" | "AddWorkout" | "RecipeNutrients"
 type Props = {
     view: View
     setView: React.Dispatch<React.SetStateAction<View>>
