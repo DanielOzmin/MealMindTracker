@@ -75,7 +75,7 @@ const BaseCalculation = ({ personalData }: { personalData: PersonalData }) => {
 
     useEffect(() => {
         const calculateNutrients = {
-            calories: CalculateBMRAndMakroNutrients().calories,
+            energy: CalculateBMRAndMakroNutrients().calories,
             protein: CalculateBMRAndMakroNutrients().protein,
             carbohydrates: CalculateBMRAndMakroNutrients().carbohydrates,
             fat: CalculateBMRAndMakroNutrients().fat,
@@ -100,7 +100,7 @@ return (
             <div className="nutrient-section">
                 <h3>Macronutrients</h3>
                 <div className="nutrient-values">
-                    <p><span>Kcal:</span> {nutrients?.calories.toFixed(0)}</p>
+                    <p><span>Kcal:</span> {nutrients?.energy.toFixed(0)}</p>
                     <p><span>Protein:</span> {nutrients?.protein.toFixed(1)}g</p>
                     <p><span>Carb:</span> {nutrients?.carbohydrates.toFixed(1)}g</p>
                     <p><span>Fat:</span> {nutrients?.fat.toFixed(1)}g</p>

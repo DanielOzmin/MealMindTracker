@@ -1,9 +1,9 @@
 import './NutritionIndex.css'
 
 const NutritionIndex = ({ percentage, label }: { percentage: number; label: string }) => {
-  const radius = 50
+  const radius = 55
   const circumference = 2 * Math.PI * radius
-  const offset = circumference - (percentage / 100) * circumference
+  const offset = circumference * (1-percentage/100)
 
   return (
     <div className="circular-progress">

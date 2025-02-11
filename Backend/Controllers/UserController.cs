@@ -1,6 +1,6 @@
 namespace Backend.Controllers;
 
-public class RecipeControllers
+public class UserController
 {
     
 }

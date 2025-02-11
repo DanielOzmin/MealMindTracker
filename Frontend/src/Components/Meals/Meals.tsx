@@ -2,65 +2,61 @@ import RecipeCard from "./RecipeCard"
 import './Meals.css'
 import { useEffect, useState } from "react"
 
+type Recipe ={
+    id: string,
+    recipeName: string,
+    totalWeight: number,
+    ingredients: string[],
+    energy: number,
+    protein: number,
+    carbohydrates: number,
+    fat: number,
+    fiber: number,
+    magnesium: number,
+    sodium: number,
+    calcium: number,
+    potassium: number,
+    iron: number,
+    zinc: number,
+}
 
-const recipes = [
-    {
-        name: "Chicken Rice",
-        ingredients: ["100g rice", "150g chicken", "2g pepper", "5g salt"],
-        image: "/images/chicken.jpg"
-    },
-    {
-        name: "Pasta Bolognese",
-        ingredients: ["200g pasta", "100g beef", "50g tomato sauce", "5g garlic"],
-        image: "/images/pasta.jpg"
-    },
-    {
-        name: "Omelette",
-        ingredients: ["3 eggs", "50g cheese", "5g butter", "2g salt"],
-        image: "/images/omlette.jpg"
-    },
-    {
-        name: "Salad",
-        ingredients: ["100g lettuce", "50g cucumber", "20g feta cheese", "5g olive oil"],
-        image: "/images/salad.jpg"
-    },
-    {
-        name: "Chicken Rice",
-        ingredients: ["100g rice", "150g chicken", "2g pepper", "5g salt"],
-        image: "/images/chicken.jpg"
-    },
-    {
-        name: "Pasta Bolognese",
-        ingredients: ["200g pasta", "100g beef", "50g tomato sauce", "5g garlic"],
-        image: "/images/pasta.jpg"
-    },
-    {
-        name: "Omelette",
-        ingredients: ["3 eggs", "50g cheese", "5g butter", "2g salt"],
-        image: "/images/omlette.jpg"
-    },
-    {
-        name: "Salad",
-        ingredients: ["100g lettuce", "50g cucumber", "20g feta cheese", "5g olive oil"],
-        image: "/images/salad.jpg"
-    },
-    {
-        name: "Chicken Rice",
-        ingredients: ["100g rice", "150g chicken", "2g pepper", "5g salt"],
-        image: "/images/chicken.jpg"
-    },
-]
 const Meals = () => {
     const [foodName, setFoodName] = useState<string>("")
-    const [recipesList, setRecipesList] = useState(recipes)
+    const [recipesList, setRecipesList] = useState<Recipe[]>([])
+    const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([])
 
-
+    useEffect(()=>{
+        const getAllRecipe = async() => {
+            try {
+                const response = await fetch("/api/Recipe/getAllRecipes")
+                const data: Recipe[] = await response.json()
+                const parsedRecipes = data.map(recipe => ({
+                    ...recipe,
+                    ingredients: typeof recipe.ingredients === "string" 
+                    ? JSON.parse(recipe.ingredients) 
+                    : recipe.ingredients
+                }))
+                setRecipesList(parsedRecipes)
+                setFilteredRecipes(parsedRecipes)
+            } catch (error) {
+                console.error("failed to fetch")
+            }
+        }
+        getAllRecipe()
+    },[])
+   
     useEffect(() => {
-        const filteredRecipes = recipesList.filter((r) => r.name.toLowerCase().includes(foodName.toLowerCase()))
-        setRecipesList(filteredRecipes)
-        if (foodName === "") setRecipesList(recipes)
-    }, [foodName])
-    console.log(foodName)
+        if (!foodName.trim()) {
+          setFilteredRecipes(recipesList);
+        } else {
+          setFilteredRecipes(
+            recipesList.filter(r =>
+              r.recipeName.toLowerCase().includes(foodName.toLowerCase())
+            )
+          )
+        }
+      }, [foodName, recipesList])
+    
 
     return (
         <div className="page-container">
@@ -68,7 +64,7 @@ const Meals = () => {
                 <h1>Meals</h1>
                 <input placeholder="search by name" onChange={(e) => setFoodName(e.target.value)} />
                 <div className="meals-grid">
-                    {recipesList.map((recipe, index) => (
+                    {filteredRecipes.map((recipe, index) => (
                         <RecipeCard key={index} recipe={recipe} />
                     ))}
                 </div>

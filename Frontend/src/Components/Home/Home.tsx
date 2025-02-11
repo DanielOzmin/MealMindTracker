@@ -18,7 +18,7 @@ const Home = () => {
     const [view, setView] = useState<View>("Daily")
     const [recipe, setRecipe] = useState<Recipe>({title: "", ingredients: []})
     const [nutritionInfo, setNutritionInfo] = useState<Nutrients & {id:string, totalWeight: number }>({
-        id: "",calories: 0, protein: 0, carbohydrates: 0, fat: 0,
+        id: "",energy: 0, protein: 0, carbohydrates: 0, fat: 0,
         fiber: 0, magnesium: 0, sodium: 0, calcium: 0, 
         potassium: 0, iron: 0, zinc: 0, totalWeight: 0
     })

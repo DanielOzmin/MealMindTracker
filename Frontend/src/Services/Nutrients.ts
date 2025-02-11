@@ -17,7 +17,7 @@ import { createContext } from "react"
 //     zinc: number
 // }
 export type Nutrients ={
-    calories: number,
+    energy: number,
     protein: number,
     carbohydrates: number,
     fat: number,

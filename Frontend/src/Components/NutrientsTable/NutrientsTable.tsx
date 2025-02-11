@@ -14,7 +14,7 @@ const NutrientsTable = ({ recipe, nutritionInfo }: Props) => {
             RecipeName: recipe.title,
             TotalWeight: nutritionInfo.totalWeight,
             Ingredients: JSON.stringify(recipe.ingredients),
-            Energy: nutritionInfo.calories,
+            Energy: nutritionInfo.energy,
             Protein: nutritionInfo.protein,
             Carbohydrates: nutritionInfo.carbohydrates,
             Fat: nutritionInfo.fat,
@@ -27,7 +27,7 @@ const NutrientsTable = ({ recipe, nutritionInfo }: Props) => {
             Zinc: nutritionInfo.zinc,
         }
         try {
-            const response = await fetch("/api/RecipeControllers/addRecipe", {
+            const response = await fetch("/api/Recipe/addRecipe", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(fullRecipe)
@@ -49,7 +49,7 @@ const NutrientsTable = ({ recipe, nutritionInfo }: Props) => {
             <h2>{recipe.title}</h2>
             <p className="total-weight">Total Weight: <strong>{nutritionInfo.totalWeight}g</strong></p>
             <hr />
-            <p className="calories"><strong>Calories: {nutritionInfo.calories}kcal</strong></p>
+            <p className="calories"><strong>Calories: {nutritionInfo.energy}kcal</strong></p>
             <hr />
 
             <div className="nutrient">

@@ -1,6 +1,6 @@
 namespace Backend.Models;
 
-public class RecipeConsuption
+public class Workout
 {
     
 }

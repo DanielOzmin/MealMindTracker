@@ -8,6 +8,7 @@ import { PersonalData } from '../../Services/User'
 const Settings = () => {
     const [isAlreadySet, setIsAlreadySet] = useState<boolean>(false)
     const [personalData, setPersonalData] = useState<PersonalData>({
+        id: "1",
         weight: 70,
         age: 25,
         gender: "male",
@@ -24,9 +25,32 @@ const Settings = () => {
         })
     }
     
-    const handleSubmit=(e:React.FormEvent<HTMLElement>)=>{
+    const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
         e.preventDefault()
-        setIsAlreadySet(true)
+
+        try {
+            const response = await fetch("/api/User/personalData", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(personalData)
+            })
+
+            if (!response.ok) {
+                throw new Error("Failed to save personal data")
+            }
+
+            const data = await response.json()
+            console.log("API Response:", data)
+
+            setPersonalData(prevData => ({
+                ...prevData,
+                id: data.user.id
+            }))
+
+            setIsAlreadySet(true)
+        } catch (error) {
+            console.error("Error submitting data:", error)
+        }
     }
 
     return (

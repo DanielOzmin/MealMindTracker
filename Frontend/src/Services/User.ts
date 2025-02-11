@@ -1,4 +1,5 @@
 export type PersonalData = {
+    id: string,
     weight: number,
     age: number,
     gender: string,
