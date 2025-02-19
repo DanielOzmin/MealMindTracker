@@ -20,6 +20,7 @@ type Recipe = {
     potassium: number,
     iron: number,
     zinc: number,
+    description?: string
 }
 type RecipeProps = {
     recipe: Recipe
@@ -29,10 +30,11 @@ const RecipeCard = ({ recipe }: RecipeProps) => {
     const [showModal, setShowModal] = useState<boolean>(false)
     const [showAmoutInput, setShowAmountInput] = useState<boolean>(false)
     const [amount, setAmount] = useState<number>()
+    const [showAllIngredients, setShowAllIngredients] = useState(false)
 
-    const handleSetAmount = async() => {
+    const handleSetAmount = async () => {
         if (!amount || amount <= 0) return alert("Give valid amount")
-
+        setShowAmountInput(false)
         const consumptionData = {
             recipeId: recipe.id,
             amount: amount
@@ -40,14 +42,14 @@ const RecipeCard = ({ recipe }: RecipeProps) => {
         try {
             const response = await fetch("/api/RecipeConsumption/consume", {
                 method: "POST",
-                headers: {"Content-Type": "application/json"},
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(consumptionData)
             })
             if (!response.ok) {
                 throw new Error(`Server error: ${response.status}`)
             }
             const data = await response.json()
-            setShowAmountInput(false)
+            setAmount(0)
             alert(data.message)
         } catch (error) {
             console.error("failed to fetch")
@@ -60,12 +62,19 @@ const RecipeCard = ({ recipe }: RecipeProps) => {
         <>
             <div className="recipe-card">
                 <h2>{recipe.recipeName}</h2>
-                {/*<img src={recipe.image} alt={recipe.name} width="150" />*/}
-                {recipe.ingredients.map((ingredient, index) => (
+
+                {recipe.ingredients.slice(0, showAllIngredients ? recipe.ingredients.length : 3).map((ingredient, index) => (
                     <p key={index}>
-                        {ingredient.split(" ")[0]} - {ingredient.split(" ")[1]}
+                        {ingredient}
                     </p>
                 ))}
+
+                {recipe.ingredients.length > 3 && !showAllIngredients && (
+                    <button className="see-more-btn" onClick={() => setShowAllIngredients(true)}>
+                        See more
+                    </button>
+                )}
+
                 <div className="button-group">
                     <button onClick={() => setShowModal(true)}>Nutrients</button>
                     <button onClick={() => setShowAmountInput(true)}>Eaten today</button>

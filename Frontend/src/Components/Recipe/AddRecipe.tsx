@@ -1,8 +1,7 @@
-import { useState } from "react"
 import './AddRecipe.css'
 import { Nutrients } from "../../Services/Nutrients"
 
-type View = "Daily" | "Weekly" | "Monthly" | "AllTime" | "Settings" | "AddWorkout" | "RecipeNutrients"
+type View = "Daily" | "Weekly" | "Monthly" | "AllTime" | "Settings" | "AddWorkout" | "RecipeNutrients" | "MealRecommendation"
 type Recipe = {
   title: string,
   ingredients: string[]

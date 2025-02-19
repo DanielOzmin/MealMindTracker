@@ -4,7 +4,7 @@ import { Nutrients } from '../../Services/Nutrients'
 
 type Props = {
     recipe: Recipe
-    nutritionInfo: Nutrients & { id: string, totalWeight: number }
+    nutritionInfo: Nutrients & { id: string, totalWeight: number, description?: string}
 }
 
 const NutrientsTable = ({ recipe, nutritionInfo }: Props) => {
@@ -25,7 +25,9 @@ const NutrientsTable = ({ recipe, nutritionInfo }: Props) => {
             Potassium: nutritionInfo.potassium,
             Iron: nutritionInfo.iron,
             Zinc: nutritionInfo.zinc,
+            Description: nutritionInfo?.description
         }
+
         try {
             const response = await fetch("/api/Recipe/addRecipe", {
                 method: "POST",
@@ -40,7 +42,7 @@ const NutrientsTable = ({ recipe, nutritionInfo }: Props) => {
             const data = await response.json();
             console.log(data);
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
 
@@ -69,6 +71,7 @@ const NutrientsTable = ({ recipe, nutritionInfo }: Props) => {
                 <p><strong>Iron</strong> {nutritionInfo.iron.toFixed(1)}mg</p>
                 <p><strong>Zinc</strong> {nutritionInfo.zinc.toFixed(1)}mg</p>
             </div>
+                <p>{nutritionInfo.description}</p>
 
             <hr />
 

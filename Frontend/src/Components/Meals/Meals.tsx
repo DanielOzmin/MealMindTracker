@@ -18,6 +18,7 @@ type Recipe ={
     potassium: number,
     iron: number,
     zinc: number,
+    description?: string
 }
 
 const Meals = () => {

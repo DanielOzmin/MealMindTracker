@@ -47,4 +47,7 @@
   .recipe-card button:hover {
     background: #0056b3;
   }
+  .show-more-btn:hover, .see-more-btn:hover {
+    text-decoration: underline;
+  }
   

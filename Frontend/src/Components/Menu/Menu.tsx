@@ -1,7 +1,7 @@
 import './Menu.css'
 import { useNavigate } from 'react-router-dom'
 
-type View = "Daily" | "Weekly" | "Monthly" | "AllTime" | "Settings" | "AddWorkout" | "RecipeNutrients"
+type View = "Daily" | "Weekly" | "Monthly" | "AllTime" | "Settings" | "AddWorkout" | "RecipeNutrients" | "MealRecommendation"
 type Props = {
     view: View
     setView: React.Dispatch<React.SetStateAction<View>>
@@ -24,6 +24,7 @@ const Menu = ({ view, setView }: Props) => {
                 <li className={`MenuItem ${view == "AddWorkout" ? "active" : ""}`} onClick={() => setView("AddWorkout")}>Add Workout</li>
                 <li className={`MenuItem ${view == "Settings" ? "active" : ""}`} onClick={() => setView("Settings")}>Personal Data</li>
                 <li className="MenuItem" onClick={handleMealsClick}>Meals</li>
+                <li className={`MenuItem ${view == "MealRecommendation" ? "active" : ""}`} onClick={() => setView("MealRecommendation")}>Meal Recommendation </li>
             </ul>
         </div>
     )

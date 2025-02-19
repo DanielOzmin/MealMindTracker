@@ -3,7 +3,7 @@ import './Statistics.css'
 import { Nutrients, NutrientsContext } from '../../Services/Nutrients';
 import { useContext, useState, useEffect } from 'react';
 
-type View = "Daily" | "Weekly" | "Monthly" | "AllTime" | "Settings" | "AddWorkout" | "RecipeNutrients"
+type View = "Daily" | "Weekly" | "Monthly" | "AllTime" | "Settings" | "AddWorkout" | "RecipeNutrients" | "MealRecommendation"
 type Prop = {
   view: View
 }

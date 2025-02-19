@@ -37,3 +37,16 @@
   .close-modal:hover {
     background: #e60000;
   }
+
+  .show-more-btn, .see-more-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 0;
+  }
+
+  .show-more-btn:hover, .see-more-btn:hover {
+    text-decoration: underline;
+  }
