@@ -16,8 +16,9 @@ type Recipe = {
 }
 
 const Home = () => {
-    const [view, setView] = useState<View>("Daily")
+    const [view, setView] = useState<View>("Settings")
     const [recipe, setRecipe] = useState<Recipe>({title: "", ingredients: []})
+    const [nutrientDeficit, setNutrientDeficit] = useState<number>(0)
     const [nutritionInfo, setNutritionInfo] = useState<Nutrients & {id:string, totalWeight: number, description?:string }>({
         id: "",energy: 0, protein: 0, carbohydrates: 0, fat: 0,
         fiber: 0, magnesium: 0, sodium: 0, calcium: 0, 
@@ -32,8 +33,8 @@ const Home = () => {
                 {view == "AddWorkout" && <AddWorkout />}
                 {view == "Settings" && <Settings /> }
                 {view == "RecipeNutrients" && <NutrientsTable recipe={recipe} nutritionInfo={nutritionInfo}/>}
-                {view != "AddWorkout" && view != "Settings" && view!="RecipeNutrients" && view!= "MealRecommendation" && <Statistics view={view}/>}
-                {view == "MealRecommendation" && <MealRecommendation/>}
+                {view != "AddWorkout" && view != "Settings" && view!="RecipeNutrients" && view!= "MealRecommendation" && <Statistics view={view} setNutrientDeficit={setNutrientDeficit}/>}
+                {view == "MealRecommendation" && <MealRecommendation nutrientDeficit={nutrientDeficit}/>}
                 <AddRecipe setView={setView} setNutritionInfo={setNutritionInfo} setRecipe={setRecipe} recipe={recipe} />
             </div>
         </div>)

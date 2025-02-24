@@ -18,8 +18,11 @@ type Recipe = {
     zinc: number;
     description: string;
 }
+type Props={
+    nutrientDeficit: number
+}
 
-const MealRecommendation = () => {
+const MealRecommendation = ({nutrientDeficit} : Props) => {
     const [input, setInput] = useState<string>("")
     const [loading, setLoading] = useState<boolean>(false)
     const [recipe, setRecipe] = useState<Recipe | null>(null)
@@ -27,11 +30,12 @@ const MealRecommendation = () => {
     const handleClick = async () => {
         setLoading(true)
         setRecipe(null)
+        const request = { Wish: input, NutrientDeficit: nutrientDeficit}
         try {
             const response = await fetch("/api/MealRecommendation/mealsRecommendation", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(input)
+                body: JSON.stringify({request})
             })
             if (!response.ok) {
                 throw new Error("Somthing go wrong while fetching data")
@@ -77,6 +81,7 @@ const MealRecommendation = () => {
             }
 
             const data = await response.json()
+            alert("Recipe added to the meals")
             console.log(data)
         } catch (error) {
             console.error(error)

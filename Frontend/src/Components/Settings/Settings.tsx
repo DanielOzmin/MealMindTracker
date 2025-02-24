@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Settings.css'
 import BaseCalculation from './BaseCalculation'
 import { PersonalData } from '../../Services/User'
@@ -15,6 +15,28 @@ const Settings = () => {
         height: 175,
         activityLevel: 1
     })
+
+    useEffect(() => {
+        const fetchPersonalData = async () => {
+            try {
+                const response = await fetch("/api/User/getPersonalData")
+                if (!response.ok) {
+                    throw new Error("Failed to fetch personal data")
+                }
+                const data = await response.json()
+                setPersonalData(data)
+                setIsAlreadySet(true)
+            } catch (error) {
+                console.error("Error fetching personal data:", error)
+            }
+        }
+        fetchPersonalData()
+    }, [])
+
+    if (!personalData) {
+        return <p>Loading personal data...</p>
+    }
+
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setPersonalData({
@@ -55,7 +77,7 @@ const Settings = () => {
 
     return (
         <div className="settings-container">
-            {isAlreadySet?<BaseCalculation personalData={personalData} />:
+            {isAlreadySet?<BaseCalculation personalData={personalData} setIsAlreadySet={setIsAlreadySet}/>:
             <form className="settings-form" onSubmit={handleSubmit}>
                 <h2>Personal Information</h2>
 

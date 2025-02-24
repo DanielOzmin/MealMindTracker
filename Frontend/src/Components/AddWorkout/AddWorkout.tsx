@@ -24,12 +24,14 @@ const AddWorkout = () => {
                 throw new Error(`Server error: ${response.status}`)
             }
             const data = await response.json()
+            alert(data.message)
             console.log(data)
         } catch (error) {
             console.error("Failed to fetch")
             alert("failed to save workout")
         }
     }
+    
     return (
         <div className="add-workout-container">
             <h2>Workout</h2>

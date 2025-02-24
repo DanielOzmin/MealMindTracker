@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import './Meals.css'
 import './RecipeCard.css'
 import ModalNutrien from "./ModalNutrient";
@@ -21,6 +21,7 @@ type Recipe = {
     iron: number,
     zinc: number,
     description?: string
+    image?: string
 }
 type RecipeProps = {
     recipe: Recipe
@@ -31,6 +32,7 @@ const RecipeCard = ({ recipe }: RecipeProps) => {
     const [showAmoutInput, setShowAmountInput] = useState<boolean>(false)
     const [amount, setAmount] = useState<number>()
     const [showAllIngredients, setShowAllIngredients] = useState(false)
+    const [imageUrl, setImageUrl] = useState<string | undefined>(recipe.image)
 
     const handleSetAmount = async () => {
         if (!amount || amount <= 0) return alert("Give valid amount")
@@ -58,22 +60,68 @@ const RecipeCard = ({ recipe }: RecipeProps) => {
 
     }
 
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement> ) => {
+        if (!e.target.files || e.target.files.length === 0) return
+
+        const file = e.target.files[0]
+        const formData = new FormData()
+        formData.append("file", file)
+
+        try {
+            const response = await fetch(`/api/Recipe/uploadImage?id=${recipe.id}`, {
+                method: "POST",
+                body: formData
+            })
+
+            if (!response.ok) {
+                throw new Error("Failed to upload image")
+            }
+
+            const data = await response.json()
+            setImageUrl(data.imageUrl)
+
+        } catch (error) {
+            console.error(error)
+            alert("Upload failed!")
+        }
+    }
+    
+    const fileInputRef = useRef<HTMLInputElement | null>(null)
+
+    const handleUpload=()=>{
+        fileInputRef.current!.click() 
+    }
+
+
     return (
         <>
             <div className="recipe-card">
                 <h2>{recipe.recipeName}</h2>
-
-                {recipe.ingredients.slice(0, showAllIngredients ? recipe.ingredients.length : 3).map((ingredient, index) => (
+                {imageUrl ? (
+                    <img src={imageUrl} alt="recipe pic" className="recipe-image"/>
+                ) : (
+                    <div className="upload-container">
+                        <input 
+                            type="file" 
+                            ref={fileInputRef} 
+                            style={{ display: "none" }} 
+                            onChange={handleFileChange} 
+                        />
+                        <button onClick={handleUpload}>+</button>
+                    </div>
+                )}
+                 {recipe.ingredients.slice(0, showAllIngredients ? recipe.ingredients.length : 3).map((ingredient, index) => (
                     <p key={index}>
                         {ingredient}
                     </p>
                 ))}
-
+            
                 {recipe.ingredients.length > 3 && !showAllIngredients && (
                     <button className="see-more-btn" onClick={() => setShowAllIngredients(true)}>
                         See more
                     </button>
                 )}
+               
 
                 <div className="button-group">
                     <button onClick={() => setShowModal(true)}>Nutrients</button>

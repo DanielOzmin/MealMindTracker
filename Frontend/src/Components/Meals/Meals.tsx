@@ -19,6 +19,7 @@ type Recipe ={
     iron: number,
     zinc: number,
     description?: string
+    image?: string
 }
 
 const Meals = () => {

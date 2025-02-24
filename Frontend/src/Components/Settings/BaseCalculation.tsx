@@ -3,10 +3,14 @@ import { useContext, useEffect } from 'react'
 import { PersonalData } from '../../Services/User'
 import { NutrientsContext } from '../../Services/Nutrients'
 
+type CalculationProps = {
+    personalData: PersonalData,
+    setIsAlreadySet: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-const BaseCalculation = ({ personalData }: { personalData: PersonalData }) => {
+const BaseCalculation = ({ personalData, setIsAlreadySet} : CalculationProps) => {
     const nutrientsContext = useContext(NutrientsContext)
-
+    console.log("blablabla:", nutrientsContext)
     if (!nutrientsContext) {
         throw new Error("BaseCalculation must be used by nutriens context")
     }
@@ -119,6 +123,7 @@ return (
                 </div>
             </div>
         </div>
+        <button className="button" onClick={()=> setIsAlreadySet(false)}>Back</button>
     </div>
 )
 }

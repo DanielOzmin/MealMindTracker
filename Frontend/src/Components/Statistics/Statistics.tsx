@@ -6,9 +6,11 @@ import { useContext, useState, useEffect } from 'react';
 type View = "Daily" | "Weekly" | "Monthly" | "AllTime" | "Settings" | "AddWorkout" | "RecipeNutrients" | "MealRecommendation"
 type Prop = {
   view: View
+  setNutrientDeficit: React.Dispatch<React.SetStateAction<number>>
 }
-const Statistics = ({ view }: Prop) => {
+const Statistics = ({ view, setNutrientDeficit }: Prop) => {
   const nutrientsContext = useContext(NutrientsContext)
+  const [plusKcal, setPlusKcal] = useState<number>(0)
   const [current, setCurrent] = useState<Nutrients>({
     energy: 0, protein: 0, carbohydrates: 0, fat: 0, fiber: 0, magnesium: 0, sodium: 0, calcium: 0, potassium: 0, iron: 0, zinc: 0
   })
@@ -19,8 +21,8 @@ const Statistics = ({ view }: Prop) => {
 
   const { nutrients } = nutrientsContext
   const getDaysInMonth = () => {
-    const today = new Date();
-    return new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+    const today = new Date()
+    return new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate()
   }
   const getMultiplier = () => {
     switch (view) {
@@ -35,38 +37,57 @@ const Statistics = ({ view }: Prop) => {
 
   const getPercentage = (a?: number, b?: number) => {
     if (!b || b === 0) return 0
-    return Number(((a ?? 0) / (b*multiplier) * 100).toFixed(1))
+    return Number(((a ?? 0) / (b * multiplier) * 100).toFixed(1))
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchStatisticsData = async () => {
       try {
         const response = await fetch(`/api/RecipeConsumption/getByPeriod?view=${view}`)
-        if(!response.ok){
+        if (!response.ok) {
           throw new Error("failed to fecth data")
         }
         const data = await response.json()
         console.log(data)
         setCurrent(data)
       } catch (error) {
-        console.error("error fetching data: ",error)
+        console.error("error fetching data: ", error)
         setCurrent({
-          energy: 0, protein: 0, carbohydrates: 0, fat: 0, fiber: 0, 
+          energy: 0, protein: 0, carbohydrates: 0, fat: 0, fiber: 0,
           magnesium: 0, sodium: 0, calcium: 0, potassium: 0, iron: 0, zinc: 0
         })
-      }  
+      }
+    }
+    const fetchCaloriesFromWorkout = async () => {
+      try {
+        const response = await fetch(`/api/Workout/getByPeriod?view=${view}`)
+        if (!response.ok) {
+          throw new Error("failed to fecth data")
+        }
+        const data = await response.json()
+        setPlusKcal(data)
+      } catch (error) {
+        console.error(error)
+      }
+
+    }
+    const calculateNutrientDeficit=()=>{
+      const deficit: number = nutrients!.energy-current!.energy 
+      setNutrientDeficit(deficit)
     }
     fetchStatisticsData()
-  },[view])
-  
-console.log(current)
+    fetchCaloriesFromWorkout()
+    calculateNutrientDeficit()
+  }, [view])
+
+  console.log(current)
 
   return (
     <div className="statistics-container">
       <div className="nutrition-container">
         <h2>{view} Statistics</h2>
         <div className="nutrition-progress">
-          <NutritionIndex percentage={getPercentage(current?.protein,nutrients?.protein)} label="Protein" />
+          <NutritionIndex percentage={getPercentage(current?.protein, nutrients?.protein)} label="Protein" />
           <NutritionIndex percentage={getPercentage(current?.carbohydrates, nutrients?.carbohydrates)} label="Carbs" />
           <NutritionIndex percentage={getPercentage(current?.fat, nutrients?.fat)} label="Fat" />
         </div>
@@ -75,7 +96,7 @@ console.log(current)
       <div className="nutrition-list-container">
         <h3>Macronutrients:</h3>
         <ul className="nutrition-list">
-        <li>Calories: {((nutrients?.energy ?? 0) * multiplier).toFixed(0)} / {(current?.energy ?? 0).toFixed(0)} kcal</li>
+          <li>Calories: {(((nutrients?.energy ?? 0) * multiplier) + plusKcal).toFixed(0)} / {(current?.energy ?? 0).toFixed(0)} kcal</li>
           <li>Protein: {((nutrients?.protein ?? 0) * multiplier).toFixed(1)} / {current?.protein.toFixed(1)} g</li>
           <li>Carb: {((nutrients?.carbohydrates ?? 0) * multiplier).toFixed(1)} / {current?.carbohydrates.toFixed(1)} g</li>
           <li>Fat: {((nutrients?.fat ?? 0) * multiplier).toFixed(1)} / {current?.fat.toFixed(1)} g</li>
