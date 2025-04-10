@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models;
 
-public class RecipeConsuption
+public class RecipeConsumption
 {
     [Key]
     public Guid Id { get; set; }
@@ -11,10 +11,8 @@ public class RecipeConsuption
     [ForeignKey("Recipe")]
     public Guid RecipeId { get; set; }
     public Recipe Recipe { get; set; }
-    
     [Required]
     public double Amount { get; set; }
-
     [Required]
     public DateTime Date { get; set; } = DateTime.UtcNow;
     
