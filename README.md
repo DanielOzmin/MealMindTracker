@@ -1,66 +1,82 @@
-MealMindTracker
+# 🧠🍽️ MealMindTracker – Smart Nutrition, Smarter You
 
-📌 Project Overview
+![Main](./ScreenShots/Képernyőfotó%202025-04-10%20-%209.43.16.png)
+![Statistics](./ScreenShots/Képernyőfotó%202025-04-10%20-%209.43.28.png)
+![Meals](./ScreenShots/Képernyőfotó%202025-04-10%20-%209.43.54.png)
 
-MealMindTracker is a full-stack application that helps users track their daily, weekly, and monthly nutrient intake (macronutrients, micronutrients, and calories). Users can upload their own recipes, which the application automatically evaluates for nutritional content.
-The system utilizes artificial intelligence (AI) to provide personalized meal recommendations based on the user’s daily calorie needs and dietary habits.
-Future development plans include a more advanced workout statistics and evaluation system, which will analyze training load and provide recommendations for optimizing workouts and meals.
-The long-term goal is to make the application available as a mobile app, either natively or with a cross-platform solution, while integrating additional AI-powered features.
+> **MealMindTracker** is your intelligent companion for mastering your nutrition. Whether you're a fitness enthusiast, a health-conscious individual, or someone just starting out—this app helps you **track, plan, and optimize** your meals with the power of AI.
 
-🎯 Key Features
+---
 
-✅ Add Recipes – Users can input ingredients, and the app will automatically calculate their nutritional values. Recipes can be saved for future use.
-✅ Track Nutrient Intake – Users can log how much they consumed of a given food, and the app will store this data.
-✅ AI-Generated Meal Recommendations – Using the OpenAI API, the app will analyze past nutrient intake and suggest the next meals accordingly.
-✅ Workout Statistics & Load Optimization (Planned) – The app will analyze workout intensity and provide tailored nutrition and training recommendations.
-✅ Image Upload – Users can upload food photos to accompany their recipes.
-✅ Statistics & Analytics – Tracks macro- and micronutrient intake over daily, weekly, and monthly periods.
-✅ Mobile Version (Planned) – The application will be optimized for mobile use and developed as a standalone mobile app.
-✅ Additional AI Features – AI-driven insights for deeper analysis and personalized suggestions.
+## 🚀 Why MealMindTracker?
 
-🛠 Tech Stack
+MealMindTracker tailors your experience using advanced technology:
 
-Backend: ASP.NET Core, Entity Framework Core, MSSQL
-Frontend: React + TypeScript
-AI Integration: OpenAI API
-Image Upload: AWS S3
-Storage & Containerization: Docker, Azure Data Studio
-Mobile Version: (Planned, likely with a cross-platform solution)
-⚙️ Setup & Running the Application
+- 📊 Track your **macros**, **micros**, and **calories** daily, weekly, and monthly  
+- 🧠 Let **AI** recommend meals based on your goals and habits  
+- 📸 Upload your own recipes – the app calculates nutrition for you  
+- 💪 Plan smarter workouts and meals (coming soon!)  
+- 📱 Mobile version in the works for full accessibility  
 
-1️⃣ Backend Setup
+---
 
-Clone the repository.
+## ✨ Core Features
 
-Configure the necessary keys in user-secrets:
-OpenAI:ApiKey = "Your key"
-Edamam:ApiKey = "Your key"
-Edamam:ApiId = "Your Edamam ID"
-ConnectionStrings:DefaultConnection = "Your connection string"
-AWSKeys:S3_BUCKET_NAME = "Your bucket name"
-AWSKeys:AWS_SECRET_KEY = "Your key"
-AWSKeys:AWS_REGION = "Your region"
-AWSKeys:AWS_ACCESS_KEY = "Your key"
+- ✅ **Smart Recipe Logging** – Add ingredients, auto-calculated nutrition  
+- ✅ **Nutrition Tracking** – Log your food intake over time  
+- ✅ **AI-Powered Meal Planning** – Personalized suggestions via OpenAI  
+- ✅ **Photo Upload** – Attach images to your meals  
+- ✅ **Analytics Dashboard** – View daily, weekly, monthly nutrient stats  
+- ✅ **Workout Integration** *(Coming Soon)*  
+- ✅ **Mobile Version** *(Coming Soon)*  
+- ✅ **Deeper AI Insights** *(Coming Soon)*
 
-Run database migrations:
+---
 
+## ⚙️ Tech Stack
+
+| Layer             | Technology                       |
+|------------------|----------------------------------|
+| **Backend**       | ASP.NET Core, Entity Framework Core, MSSQL |
+| **Frontend**      | React + TypeScript               |
+| **AI Integration**| OpenAI API                       |
+| **Image Upload**  | AWS S3                           |
+| **Containerization** | Docker                        |
+| **DevOps & DB**   | Azure Data Studio                |
+
+---
+
+## 🧪 Getting Started
+
+### 🔧 Backend Setup
+
+1. Clone the repository  
+2. Set the following secrets using `dotnet user-secrets`:
+
+```bash
+OpenAI:ApiKey = "your-api-key"
+Edamam:ApiKey = "your-api-key"
+Edamam:ApiId = "your-edamam-id"
+ConnectionStrings:DefaultConnection = "your-connection-string"
+AWSKeys:S3_BUCKET_NAME = "your-bucket"
+AWSKeys:AWS_SECRET_KEY = "your-secret"
+AWSKeys:AWS_REGION = "your-region"
+AWSKeys:AWS_ACCESS_KEY = "your-access-key"
+
+3. Run the backend:
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 dotnet run
-
-2️⃣ Frontend Setup
-
-Install dependencies:
-npm i
-
-Start the frontend application:
+🌐 Frontend Setup
+npm install
 npm run dev
+📅 Roadmap
 
-📅 Future Plans & Upcoming Features
+🔹 Workout Statistics – Detailed training analytics
+🔹 AI-Based Meal + Workout Sync – Food + fitness in harmony
+🔹 Mobile App – Native or cross-platform iOS & Android version
+🔹 Expanded Nutrition Insights – Vitamins, minerals, supplements
+💡 Contribute or Suggest!
 
-🔹 Expanded Workout Statistics – More detailed training analysis and load tracking.
-🔹 AI-Driven Workout & Meal Recommendations – Tailored suggestions based on individual diet and activity levels.
-🔹 Mobile App – Dedicated mobile version for iOS and Android.
-🔹 More In-Depth Nutrition Analytics – Tracking vitamins, minerals, and supplement recommendations.
-
-If u have any great idea how it can be more effective let me know! :)
+Got a cool idea? Want to help build the future of smart nutrition?
+Create an issue, fork the repo, or send your suggestions – we’d love to hear from you! 🙌
